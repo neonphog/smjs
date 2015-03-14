@@ -162,6 +162,17 @@
         });
       });
 
+      describe("T_FOR_IN", function () {
+        it('basic', function () {
+          eTest('var out = "";\n' +
+            'for (var i in {"wo":1, "rk":1, "ed":1}) {\n' +
+            '  out += i;\n' +
+            '}\n' +
+            'return out;',
+            'worked');
+        });
+      });
+
       describe("T_TRY / T_THROW / T_CATCH", function () {
         it('basic', function () {
           eTest(
