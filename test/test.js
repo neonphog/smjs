@@ -228,6 +228,44 @@
         });
       });
 
+      describe("T_SWITCH", function () {
+        it('basic', function () {
+          eTest('switch (2) {\n' +
+            'case 1: return "bad";\n' +
+            'case 2: return "worked";\n' +
+            'case 3: return "bad";\n' +
+            '}',
+            'worked');
+        });
+
+        it('default', function () {
+          eTest('switch (2) {\n' +
+            'case 1: return "bad";\n' +
+            'default: return "worked";\n' +
+            '}',
+            'worked');
+        });
+
+        it('block', function () {
+          eTest('switch (2) {\n' +
+            'case 1: {return "bad";}\n' +
+            'case 2: {return "worked";}\n' +
+            'case 3: {return "bad";}\n' +
+            '}',
+            'worked');
+        });
+
+        it('break', function () {
+          eTest('var a = "bad";\n' +
+            'switch (2) {\n' +
+            'case 1: a = "bad";\n' +
+            'case 2: a = "worked"; break;\n' +
+            'case 3: a = "bad";\n' +
+            '}; return a;',
+            'worked');
+        });
+      });
+
       describe("T_LITERAL", function () {
         it('string', function () {
           eTest('return "worked";', 'worked');
@@ -295,6 +333,16 @@
       describe("T_OBJECT", function () {
         it('basic', function () {
           eTest('return ({a: "bad", b:"worked"}).b;', 'worked');
+        });
+      });
+
+      describe("T_RETURN", function () {
+        it('basic', function () {
+          eTest('return true;', true);
+        });
+
+        it('empty', function () {
+          eTest('return;', undefined);
         });
       });
 
