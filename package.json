@@ -1,0 +1,37 @@
+{
+  "name": "smjs",
+  "version": "0.0.1",
+  "description": "",
+  "author": "David Braden ~3o~ph( )g <neonphog@gmail.com>",
+  "contributors": [{
+    "name": "David Braden ~3o~ph( )g",
+    "email": "neonphog@gmail.com"
+  }],
+  "scripts": {
+    "test": "grunt"
+  },
+  "main": "./lib/main",
+  "bin": {
+     "smjs": "./bin/smjs"
+  },
+  "repository": {
+    "type": "svn",
+    "url": "http://svn.neonphog.com/test/smjs"
+  },
+  "keywords": [
+  ],
+  "dependencies": {
+    "acorn": "*",
+    "commander": "*" 
+  },
+  "devDependencies": {
+    "uglify-js": "*",
+    "mocha": "*",
+    "chai": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-jscs": "*",
+    "grunt-mocha-test": "*",
+    "grunt": "*"
+  },
+  "license": "MIT"
+}

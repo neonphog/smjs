@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+var smjs = require('../lib/main');
+var program = require('commander');
+var fs = require('fs');
+
+program
+  .version('0.0.1')
+  .option('-d, --decode', 'decode cjs (default is to encode)')
+  .option('-i, --input <filename>', 'input file (default stdin)', '-')
+  .option('-o, --output <filename>', 'output file (default stdout)', '-')
+  .parse(process.argv);
+
+if (program.decode) {
+  read(function (data) {
+    write((new smjs.Decoder).decodeString(data));
+  });
+} else {
+  read(function (data) {
+    write((new smjs.Encoder).encodeString(data));
+  });
+}
+
+function read(cb) {
+  if (program.input === '-') {
+    var c = '';
+    process.stdin.resume();
+    process.stdin.on('data', function (buf) {
+      c += buf.toString();
+    });
+    process.stdin.on('end', function () {
+      cb(c.trim());
+    });
+  } else {
+    cb(fs.readFileSync(program.input).toString().trim());
+  }
+}
+
+function write(data) {
+  if (program.output === '-') {
+    console.log(data);
+  } else {
+    fs.writeFileSync(program.output, data);
+  }
+}
+
