@@ -1,5 +1,7 @@
 # SMJS
 
+[![Build Status](https://travis-ci.org/neonphog/smjs.svg?branch=master)](https://travis-ci.org/neonphog/smjs)
+
 A reference implementation of the CJS javascript minification / encoding scheme. See: [doc/cjs_grammar.md](doc/cjs_grammar.md).
 
 SMJS and CJS were created by David Braden V, ~3o~ph( )g, < neonphog/a/neonphog/d/com >
