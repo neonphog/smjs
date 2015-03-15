@@ -2,11 +2,17 @@
 
 [![Build Status](https://travis-ci.org/neonphog/smjs.svg?branch=master)](https://travis-ci.org/neonphog/smjs)
 
-A reference implementation of the CJS javascript minification / encoding scheme. See: [doc/cjs_grammar.md](doc/cjs_grammar.md).
+A reference implementation of the CJS javascript minification / encoding scheme.
+
+```
+"if (a) { return false; }" === "CJS0I1a(rL3'!"
+```
+
+See: [doc/cjs_grammar.md](doc/cjs_grammar.md).
 
 SMJS and CJS were created by David Braden V, ~3o~ph( )g, < neonphog/a/neonphog/d/com >
 
-CJS is a javascript minification / encoding scheme ( `if (a) { return false; }` === `CJS0Iqa'(rL3'!` ) designed to be small, prefer speed of parsing over speed of decoding, and contain only characters safe for inclusion in URI components (and consequently emails).
+CJS is designed to be small, prefer speed of parsing over speed of decoding, and contain only characters safe for inclusion in URI components (and consequently emails).
 
 It is currently an unstable work in progress, and should be considered unfit for production use.
 
@@ -16,10 +22,16 @@ It is currently an unstable work in progress, and should be considered unfit for
 
 ```
 $ echo "if (a) { return false; }" | ./bin/smjs
-CJS0Iqa'(rL3'!
+CJS0I1a(rL3'!
 
 $ echo "if (a) { return false; }" | ./bin/smjs | ./bin/smjs -d
 if(a){return false;}
+
+$ ./bin/smjs --bench -i jquery-1.11.2.js
+      original: 284183
+      UglifyJS: 96606
+          smjs: 109074
+UglifyJS->smjs: 94096
 ```
 
 #### Javascript
