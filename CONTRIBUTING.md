@@ -1,5 +1,11 @@
 # Contributing to SMJS
 
-Just make sure lint, style, and mocha pass. I.e. run `grunt`.
+## Lint, Style, Unit Tests
 
-One caveat: have a problem but don't know how to fix it? I welcome pull requests with new, failing unit tests.
+Just make sure `grunt` exits 0 before opening a Pull Request.
+
+One caveat: Have a problem but don't know how to fix it? I welcome pull requests with new, failing unit tests.
+
+## Squash?
+
+I don't mind if you open a Pull Request with multiple commits, but, after review / updates, I'm going to ask you to squash before I merge.
