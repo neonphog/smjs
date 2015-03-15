@@ -12,7 +12,7 @@ See: [doc/cjs_grammar.md](doc/cjs_grammar.md).
 
 SMJS and CJS were created by David Braden V, ~3o~ph( )g, < neonphog/a/neonphog/d/com >
 
-CJS is designed to be small, prefer speed of parsing over speed of decoding, and contain only characters safe for inclusion in URI components (and consequently emails).
+CJS is designed to be small, prefer speed of parsing over speed of encoding, and contain only characters safe for inclusion in URI components (and consequently emails).
 
 It is currently an unstable work in progress, and should be considered unfit for production use.
 
