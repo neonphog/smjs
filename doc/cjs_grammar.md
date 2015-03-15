@@ -10,10 +10,10 @@ Version 0 is intended as a working draft. Version 0 streams from one day may be 
 
 ### Heuristic Header
 
-CJS Version 1 Streams should begin with the literal characters:
+CJS Version 0 Streams should begin with the literal characters:
 
 ```
-CJS1
+CJS0
 ```
 
 ### D2R / D2R1 / D2R2
@@ -105,8 +105,12 @@ Following any number of escaped characters will be a literal apostrophe (').
 
 ```
 0) ESCAPED STRING
-1) literal "'"
+1) T_END
 ```
+
+### T_1 T_2 T_3 T_4 T_5 T_6 T_7 T_8 T_9
+
+### T_ID
 
 ### T_EMPTY
 
@@ -127,22 +131,6 @@ Following any number of escaped characters will be a literal apostrophe (').
 N + 1) T_END
 ```
 
-
-### T_ASSIGN
-
-```
-0) literal "a"
-1) NODE left
-2) NODE right
-```
-
-### T_ARRAY
-
-```
-0) literal "A"
-1) NODE_LIST array elements
-```
-
 ### T_LITERAL
 
 T_STRING will be an in-line value of the literal. Strings will include quoting (e.g. `l%22a%22'`)
@@ -159,3 +147,269 @@ T_STRING will be an in-line value of the literal. Strings will include quoting (
 1) D2R1 index into literal code lookup table
 ```
 
+### T_ASSIGN
+
+```
+0) literal "a"
+1) NODE left
+2) NODE right
+```
+
+### T_ARRAY
+
+```
+0) literal "A"
+1) NODE_LIST array elements
+```
+
+### T_BOP
+
+```
+0) literal "b"
+1) D2R1 index into literal code lookup table: operator
+2) NODE left
+3) NODE right
+```
+
+### T_BREAK
+
+```
+0) literal "B"
+1) T_ID | T_NULL label
+```
+
+### T_CALL
+
+```
+0) literal "c"
+1) NODE callee
+2) NODE_LIST arguments
+```
+
+### T_CONTINUE
+
+```
+0) literal "C"
+1) T_ID | T_NULL label
+```
+
+### T_EXPR
+
+```
+0) literal "E"
+1) NODE body
+```
+
+### T_FUNC
+
+```
+0) literal "f"
+1) T_ID | T_NULL name
+2) NODE_LIST arguments
+3) NODE body
+```
+
+### T_FOR
+
+```
+0) literal "F"
+1) NODE | T_NULL initializer
+2) NODE | T_NULL test
+3) NODE | T_NULL update
+4) NODE body
+```
+
+### T_FOR_IN
+
+```
+0) literal "g"
+1) NODE left
+2) NODE right
+3) NODE body
+```
+
+### T_THROW
+
+```
+0) literal "G"
+1) NODE body
+```
+
+### T_TRY
+
+```
+0) literal "h"
+1) NODE body
+2) NODE | T_NULL catch
+3) NODE | T_NULL finally
+```
+
+### T_CATCH
+
+```
+0) literal "H"
+1) T_ID | T_NULL parameter
+2) NODE body
+```
+
+### T_IF
+
+```
+0) literal "I"
+1) NODE test
+2) NODE body
+3) NODE | T_NULL alternate
+```
+
+### T_PREUPDATE
+
+```
+0) literal "j"
+1) D2R1 index into literal code lookup table: operator
+2) NODE body
+```
+
+### T_POSTUPDATE
+
+```
+0) literal "J"
+1) D2R1 index into literal code lookup table: operator
+2) NODE body
+```
+
+### T_SWITCH
+
+```
+0) literal "k"
+1) NODE discriminant
+2) NODE_LIST body
+```
+
+### T_SWICH_CASE
+
+```
+0) literal "K"
+1) NODE test
+2) NODE_LIST body
+```
+
+### T_MEMBER
+
+```
+0) literal "m"
+1) NODE left
+2) NODE right
+```
+
+### T_NEW
+
+```
+0) literal "n"
+1) NODE callee
+2) NODE_LIST arguments
+```
+
+### T_ORDER
+
+```
+0) literal "o"
+1) NODE body
+```
+
+### T_OBJECT
+
+```
+0) literal "O"
+TODO - describe OBJDEF
+```
+
+### T_RETURN
+
+```
+0) literal "r"
+1) NODE body
+```
+
+### T_SEQ
+
+```
+0) literal "S"
+1) NODE_LIST body
+```
+
+### T_TABLE
+
+```
+0) literal "t"
+TODO - describe TABLEDEF
+```
+
+### T_THIS
+
+```
+0) literal "T"
+```
+
+### T_UOP
+
+```
+0) literal "u"
+1) D2R1 index into literal code lookup table: operator
+2) NODE right
+```
+
+### T_VAR
+
+```
+0) literal "v"
+TODO - describe vardef
+```
+
+### T_DO_WHILE
+
+```
+0) literal "V"
+1) NODE body
+2) NODE test
+```
+
+### T_WHILE
+
+```
+0) literal "w"
+1) NODE test
+2) NODE body
+```
+
+### T_WITH
+
+```
+0) literal "W"
+1) NODE with item
+2) NODE body
+```
+
+### T_LABEL
+
+```
+0) literal "z"
+1) T_ID name
+2) NODE body
+```
+
+### T_CONDITIONAL
+
+```
+0) literal "Z"
+1) NODE test
+2) NODE true item
+2) NODE false item
+```
+
+### T_BLOCK
+
+```
+0) literal "("
+1) NODE_LIST body
+2) T_END
+```
