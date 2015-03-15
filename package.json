@@ -1,11 +1,12 @@
 {
   "name": "smjs",
   "version": "0.0.1",
-  "description": "",
-  "author": "David Braden ~3o~ph( )g <neonphog@gmail.com>",
+  "description": "A reference implementation of the CJS javascript minification / encoding scheme",
+  "homepage": "https://github.com/neonphog/smjs",
+  "author": "David Braden V, ~3o~ph( )g, <neonphog@neonphog.com>",
   "contributors": [{
-    "name": "David Braden ~3o~ph( )g",
-    "email": "neonphog@gmail.com"
+    "name": "David Braden V, ~3o~ph( )g",
+    "email": "neonphog@neonphog.com"
   }],
   "scripts": {
     "test": "grunt"
@@ -16,7 +17,7 @@
   },
   "repository": {
     "type": "svn",
-    "url": "http://svn.neonphog.com/test/smjs"
+    "url": "git://github.com/neonphog/smjs.git"
   },
   "keywords": [
   ],
