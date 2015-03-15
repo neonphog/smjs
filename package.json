@@ -1,6 +1,6 @@
 {
   "name": "smjs",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha",
   "description": "A reference implementation of the CJS javascript minification / encoding scheme",
   "homepage": "https://github.com/neonphog/smjs",
   "author": "David Braden V, ~3o~ph( )g, <neonphog@neonphog.com>",
@@ -16,17 +16,17 @@
      "smjs": "./bin/smjs"
   },
   "repository": {
-    "type": "svn",
+    "type": "git",
     "url": "git://github.com/neonphog/smjs.git"
   },
   "keywords": [
   ],
   "dependencies": {
     "acorn": "*",
+    "uglify-js": "*",
     "commander": "*" 
   },
   "devDependencies": {
-    "uglify-js": "*",
     "mocha": "*",
     "chai": "*",
     "grunt-contrib-jshint": "*",
