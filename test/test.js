@@ -352,10 +352,10 @@
         });
       });
 
-      describe.skip("T_TABLE", function () {
+      describe("T_TABLE", function () {
         it('full table', function () {
           var str = 'var ';
-          for (var i = 0; i < 70 * 70 * 3; ++i) {
+          for (var i = 0; i < 70 * 70 + 1; ++i) {
             str += 'longname' + i + ', ';
           }
           str += 'finalname = "worked";';
@@ -434,6 +434,11 @@
       // id table was finding toString because of an "in" check
       it('toString in id table', function () {
         eTest('return "worked".toString()', 'worked');
+      });
+
+      // and similar issues with 'hasOwnProperty'
+      it('hasOwnProperty in id table', function () {
+        eTest('return {}.hasOwnProperty("bob"); var nameTwo;', false);
       });
 
     });
