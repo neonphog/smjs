@@ -387,6 +387,17 @@
         });
       });
 
+      describe("T_DO_WHILE", function () {
+        it('basic', function () {
+          eTest('var a = "workedabc";\n' +
+            'do {\n' +
+            ' a = a.substr(0, a.length - 1);\n' +
+            '} while (a !== "worked");\n' +
+            'return a;',
+            'worked');
+        });
+      });
+
       describe("T_WHILE", function () {
         it('basic', function () {
           eTest('while (false) { break; } return "worked";', 'worked');
