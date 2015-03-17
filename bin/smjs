@@ -6,7 +6,7 @@ var UglifyJS = require('uglify-js');
 var fs = require('fs');
 
 program
-  .version('0.0.1')
+  .version(smjs.COMMON.version)
   .option('-d, --decode', 'decode cjs (default is to encode)')
   .option('-b, --bench', 'benchmark compression')
   .option('-i, --input <filename>', 'input file (default stdin)', '-')
@@ -21,13 +21,18 @@ function minify(data) {
 
 if (program.bench) {
   read(function (data) {
+    var decoderSize = fs.statSync('browser/smjs.decoder.min.js')["size"];
     var encoded = (new smjs.Encoder).encodeString(data);
     var minified = minify(data);
     var minAndSmjs = (new smjs.Encoder).encodeString(minified);
-    console.log("      original: " + data.length);
-    console.log("      UglifyJS: " + minified.length);
-    console.log("          smjs: " + encoded.length);
-    console.log("UglifyJS->smjs: " + minAndSmjs.length);
+    console.log("                original: " + data.length);
+    console.log("                UglifyJS: " + minified.length);
+    console.log("                    smjs: " + encoded.length);
+    console.log("          smjs + decoder: " +
+      (encoded.length + decoderSize));
+    console.log("          UglifyJS->smjs: " + minAndSmjs.length);
+    console.log("UglifyJS->smjs + decoder: " +
+      (minAndSmjs.length + decoderSize));
   });
 } else if (program.decode) {
   read(function (data) {
