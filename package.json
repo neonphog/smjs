@@ -1,30 +1,31 @@
 {
   "name": "smjs",
-  "version": "0.0.1-alpha",
+  "version": "0.0.1-alpha.1",
   "description": "A reference implementation of the CJS javascript minification / encoding scheme",
   "homepage": "https://github.com/neonphog/smjs",
   "author": "David Braden V, ~3o~ph( )g, <neonphog@neonphog.com>",
-  "contributors": [{
-    "name": "David Braden V, ~3o~ph( )g",
-    "email": "neonphog@neonphog.com"
-  }],
+  "contributors": [
+    {
+      "name": "David Braden V, ~3o~ph( )g",
+      "email": "neonphog@neonphog.com"
+    }
+  ],
   "scripts": {
     "test": "grunt"
   },
   "main": "./lib/main",
   "bin": {
-     "smjs": "./bin/smjs"
+    "smjs": "./bin/smjs"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/neonphog/smjs.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "dependencies": {
     "acorn": "*",
     "uglify-js": "*",
-    "commander": "*" 
+    "commander": "*"
   },
   "devDependencies": {
     "mocha": "*",
@@ -32,7 +33,8 @@
     "grunt-contrib-jshint": "*",
     "grunt-jscs": "*",
     "grunt-mocha-test": "*",
-    "grunt": "*"
+    "grunt": "*",
+    "semver": "*"
   },
   "license": "MIT"
 }

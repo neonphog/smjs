@@ -28,10 +28,12 @@ $ echo "if (a) { return false; }" | ./bin/smjs | ./bin/smjs -d
 if(a){return false;}
 
 $ ./bin/smjs --bench -i jquery-1.11.2.js
-      original: 284183
-      UglifyJS: 96606
-          smjs: 107358
-UglifyJS->smjs: 92205
+                original: 284183
+                UglifyJS: 96606
+                    smjs: 107358
+          smjs + decoder: 120627
+          UglifyJS->smjs: 92205
+UglifyJS->smjs + decoder: 105474
 ```
 
 #### Javascript
