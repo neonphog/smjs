@@ -30,10 +30,10 @@ if(a){return false;}
 $ ./bin/smjs --bench -i jquery-1.11.2.js
                 original: 284183
                 UglifyJS: 96606
-                    smjs: 107358
-          smjs + decoder: 120627
-          UglifyJS->smjs: 92205
-UglifyJS->smjs + decoder: 105474
+                    smjs: 100166
+          smjs + decoder: 113350
+          UglifyJS->smjs: 85311
+UglifyJS->smjs + decoder: 98495
 ```
 
 #### Javascript
