@@ -302,6 +302,18 @@
         });
       });
 
+      describe("T_LITERAL_TABLE", function () {
+        it('basic', function () {
+          eTest('return 111111 + 111111 + 111111;', 333333);
+        });
+
+        it('var', function () {
+          eTest('var aaa, bbb, a; var aaa, bbb, a; var aaa, bbb, a;' +
+            'var aaa = "worked"; return aaa;',
+            'worked');
+        });
+      });
+
       describe("T_MEMBER", function () {
         it('basic', function () {
           eTest('var a = {b:{c:{d:"worked"}}}; return a.b.c.d;', 'worked');

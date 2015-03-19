@@ -1,6 +1,6 @@
 {
   "name": "smjs",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "A reference implementation of the CJS javascript minification / encoding scheme",
   "homepage": "https://github.com/neonphog/smjs",
   "author": "David Braden V, ~3o~ph( )g, <neonphog@neonphog.com>",
