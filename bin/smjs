@@ -4,6 +4,7 @@ var smjs = require('../lib/main');
 var program = require('commander');
 var UglifyJS = require('uglify-js');
 var fs = require('fs');
+var sprintf = require('sprintf-js').sprintf;
 
 program
   .version(smjs.COMMON.version)
@@ -11,12 +12,44 @@ program
   .option('-b, --bench', 'benchmark compression')
   .option('-i, --input <filename>', 'input file (default stdin)', '-')
   .option('-o, --output <filename>', 'output file (default stdout)', '-')
+  .option('--native-strings',
+    'additional compression by not url encoding ' +
+    'characters unsafe for URI components')
   .parse(process.argv);
+
+function getEncoder() {
+  var uriSafe = true;
+  if (program.nativeStrings) {
+    uriSafe = false;
+  }
+  return new smjs.Encoder({
+    uriSafe: uriSafe
+  });
+}
+
 
 function minify(data) {
   return UglifyJS.minify(data, {
     fromString: true
   }).code;
+}
+
+function writeColumn(/* arguments */) {
+  var args = [].slice.call(arguments, 0);
+  args.unshift("%10s | %-11s | %-11s | %10s | %-11s | %-11s");
+  console.log(sprintf.apply(this, args));
+}
+
+function num(n) {
+  var k = n / 1024;
+  var m = k / 1024;
+  if (k <= 0.8) {
+    return n + " B";
+  } else if (m <= 0.8) {
+    return Number(k).toFixed(2) + " KiB";
+  } else {
+    return Number(m).toFixed(2) + " MiB";
+  }
 }
 
 if (program.bench) {
@@ -25,6 +58,38 @@ if (program.bench) {
     var encoded = (new smjs.Encoder).encodeString(data);
     var minified = minify(data);
     var minAndSmjs = (new smjs.Encoder).encodeString(minified);
+
+    var encodedUnsafe = (new smjs.Encoder({
+      uriSafe: false
+    })).encodeString(data);
+    var minAndSmjsUnsafe = (new smjs.Encoder({
+      uriSafe: false
+    })).encodeString(minified);
+
+    console.log("\nBenchmark for " + program.input + "\n");
+    writeColumn(
+      "NOT-SAFE", "   SIZE", "(+ decoder)",
+      "URI-SAFE", "   SIZE", "(+ decoder)");
+    writeColumn(
+      "----------", "-----------", "-----------",
+      "----------", "-----------", "-----------");
+    writeColumn(
+      "original", num(data.length), "-",
+      "-", "-", "-");
+    writeColumn(
+      "UglifyJS", num(minified.length), "-",
+      "-", "-", "-");
+    writeColumn(
+      "smjs", num(encodedUnsafe.length),
+      num(encodedUnsafe.length + decoderSize),
+      "smjs", num(encoded.length), num(encoded.length + decoderSize));
+    writeColumn(
+      "Uglify+sm", num(minAndSmjsUnsafe.length),
+      num(minAndSmjsUnsafe.length + decoderSize),
+      "Uglyfy+sm", num(minAndSmjs.length),
+      num(minAndSmjs.length + decoderSize));
+    console.log('');
+    /*
     console.log("                original: " + data.length);
     console.log("                UglifyJS: " + minified.length);
     console.log("                    smjs: " + encoded.length);
@@ -33,6 +98,7 @@ if (program.bench) {
     console.log("          UglifyJS->smjs: " + minAndSmjs.length);
     console.log("UglifyJS->smjs + decoder: " +
       (minAndSmjs.length + decoderSize));
+    */
   });
 } else if (program.decode) {
   read(function (data) {
@@ -40,7 +106,7 @@ if (program.bench) {
   });
 } else {
   read(function (data) {
-    write((new smjs.Encoder).encodeString(data));
+    write(getEncoder().encodeString(data));
   });
 }
 

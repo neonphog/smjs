@@ -28,12 +28,15 @@ $ echo "if (a) { return false; }" | ./bin/smjs | ./bin/smjs -d
 if(a){return false;}
 
 $ ./bin/smjs --bench -i jquery-1.11.2.js
-                original: 284183
-                UglifyJS: 96606
-                    smjs: 100166
-          smjs + decoder: 113350
-          UglifyJS->smjs: 85311
-UglifyJS->smjs + decoder: 98495
+
+Benchmark for jquery-1.11.2.js
+
+  NOT-SAFE |    SIZE     | (+ decoder) |   URI-SAFE |    SIZE     | (+ decoder)
+---------- | ----------- | ----------- | ---------- | ----------- | -----------
+  original | 277.52 KiB  | -           |          - | -           | -
+  UglifyJS | 94.34 KiB   | -           |          - | -           | -
+      smjs | 92.75 KiB   | 105.58 KiB  |       smjs | 97.82 KiB   | 110.65 KiB
+ Uglify+sm | 78.41 KiB   | 91.24 KiB   |  Uglyfy+sm | 83.31 KiB   | 96.14 KiB
 ```
 
 #### Javascript
